@@ -1,0 +1,96 @@
+{
+  "name": "explainable",
+  "displayName": "Explainable",
+  "description": "Understand your code — contextual explanations and runnable sandboxes for CS students",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.116.0"
+  },
+  "categories": [
+    "Education",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "explainable.explainSelection",
+        "title": "Explain this",
+        "category": "Explainable"
+      },
+      {
+        "command": "explainable.explainFile",
+        "title": "Explain this file",
+        "category": "Explainable"
+      },
+      {
+        "command": "explainable.resetApiKey",
+        "title": "Reset API Key",
+        "category": "Explainable"
+      },
+      {
+        "command": "explainable.openSession",
+        "title": "Open Session",
+        "category": "Explainable"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "explainable.explainSelection",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "explainable.explainFile",
+          "when": "!explorerResourceIsFolder",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "explainable-sidebar",
+          "title": "Explainable",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "explainable-sidebar": [
+        {
+          "id": "explainableSessions",
+          "name": "Sessions"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.17",
+    "@types/vscode": "^1.116.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "highlight.js": "^11.11.1"
+  }
+}
